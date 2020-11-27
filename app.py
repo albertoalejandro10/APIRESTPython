@@ -24,10 +24,14 @@ def getProduct(product_name):
 
 @app.route('/products/prices/<int:product_price_a>&<int:product_price_b>')
 def getProductByPrice(product_price_a, product_price_b):
-    for product in products:
-        if product_price_a 
-    productsFounds = 
-    if(len(productsFound) > 0):
+    productsFounds = [product for product in products if product['price'] != "AGOTADO" if (int(product['price']) >= product_price_a) and (int(product['price'] <= product_price_b))]
+    
+    # product for product in products:
+    #     if product['price'] != "AGOTADO":
+    #         if int(product['price'] > product_price_a):
+    #             productsFounds = product['price']
+
+    if(len(productsFounds) > 0):
         return jsonify({"product": productsFounds})
     return jsonify({"message": "Products by prices not found"})
 
